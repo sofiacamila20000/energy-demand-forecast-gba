@@ -38,6 +38,18 @@ El hallazgo más interesante no es el error en sí, sino **qué variable pesa m�
 
    **Por qué esto importa para el modelo:** esta descomposición usa *solo* información de calendario (fecha) para explicar la demanda, y aun así el residuo (lo no explicado) es la porción más grande de la variabilidad total. Eso es la evidencia de que el calendario solo no alcanza — es la justificación concreta de por qué el modelo de forecasting de la siguiente sección necesita, además del calendario, variables de clima. Dicho de otro modo: la sección 3 responde "¿cuánto explica el calendario solo?" y la sección 5 responde "¿cuánto mejora si le sumamos clima?".
 
+### ¿Por qué Machine Learning y no solo propagar la onda ajustada?
+
+La sección 3 ya insinuaba que el calendario solo no alcanza, pero esa descomposición mira toda la serie a la vez (pasado y futuro) — no es un pronóstico real, y "% de varianza explicada" no se compara directo contra el error de un modelo. Para tener una comparación honesta y en la misma unidad, se repitió el ejercicio como un pronóstico de verdad: se ajustó una onda (anual + semanal) **usando solo los datos de entrenamiento (2012-2016)**, se proyectó hacia adelante, y se evaluó el error en el mismo test set (2017-2018) que usa el modelo de ML.
+
+| Método | MAPE en test (2017-2018) |
+|---|---|
+| Onda ajustada, propagada hacia adelante (sin ML) | **11.93%** |
+| Modelo de ML — peor caso (Gradient Boosting, horizonte +4) | **5.02%** |
+| Modelo de ML — mejor caso (Gradient Boosting, horizonte +1) | **3.06%** |
+
+**Importante — la diferencia no es solo "forma matemática más compleja":** la onda ajustada solo conoce la fecha del calendario. El modelo de ML gana porque además tiene acceso a información que la onda ni siquiera ve — temperatura, humedad, si es feriado, cuánto se consumió el día anterior. La mejora viene principalmente de *más información disponible*, no únicamente de que el modelo sea más flexible.
+
 4. **Feature engineering**: variables por horizonte sin data leakage (verificado a mano con un ejemplo concreto), split temporal 2012-2016 entrenamiento / 2017-2018 test
 5. **Entrenamiento y comparación** de 3 modelos (Regresión Lineal, Random Forest, Gradient Boosting) × 4 horizontes
 6. **Importancia de variables** por horizonte
