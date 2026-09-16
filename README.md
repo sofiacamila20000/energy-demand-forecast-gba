@@ -17,7 +17,7 @@ Predicción de la demanda eléctrica del Gran Buenos Aires (GBA) a 1, 2, 3 y 4 d
 
 ![Comparación de MAPE por modelo y horizonte](figures/05_mape_comparacion.png)
 
-El hallazgo más interesante no es el error en sí, sino **qué variable pesa más según el horizonte**: a 1 día, la demanda de hoy explica el 58% de la predicción (persistencia). A 4 días, esa variable cae al 5% y la temperatura del día objetivo pasa a explicar el 52%. El modelo aprendió solo a dejar de confiar en "hoy" a medida que el horizonte crece — sin que se lo indicáramos explícitamente.
+El hallazgo más interesante no es el error en sí, sino **qué variable pesa más según el horizonte**: a 1 día, la demanda de hoy explica el 58% de la predicción (persistencia). A 4 días, esa variable cae al 5% y la temperatura del día objetivo pasa a explicar el 52%. El modelo aprendió solo a dejar de confiar en "hoy" a medida que el horizonte crece sin que se lo indicáramos explícitamente.
 
 ![Importancia de variables: horizonte +1 vs +4](figures/06_feature_importance.png)
 
@@ -30,7 +30,7 @@ El hallazgo más interesante no es el error en sí, sino **qué variable pesa m�
 
 1. **Carga y agregación** de datos horarios a diarios
 2. **Análisis exploratorio**: serie completa, perfil horario (la demanda tiene meseta al mediodía y pico fuerte a las 21hs, no un único pico), demanda día hábil vs. fin de semana
-3. **Descomposición espectral**: cuánto de la variabilidad de la demanda se explica por ciclos de calendario (anual, tendencia interanual, semanal) vs. cuánto queda sin explicar. Cada escala se trata con la técnica adecuada a su forma real: ajuste de coseno para el ciclo anual (tiene causa física sinusoidal clara), filtros Butterworth para tendencia y ciclo semanal (formas sin una onda limpia). Esta sección es exploratoria y no alimenta al modelo de forecasting — usar sus componentes como features introduciría fuga de información del futuro, porque se calculan mirando toda la serie a la vez.
+3. **Descomposición espectral**: cuánto de la variabilidad de la demanda se explica por ciclos de calendario (anual, tendencia interanual, semanal) vs. cuánto queda sin explicar. Cada escala se trata con la técnica adecuada a su forma real: ajuste de coseno para el ciclo anual (tiene causa física sinusoidal clara), filtros Butterworth para tendencia y ciclo semanal (formas sin una onda limpia). Esta sección es exploratoria y no alimenta al modelo de forecasting ya que usar sus componentes como features introduciría fuga de información del futuro, porque se calculan mirando toda la serie a la vez.
 
    ![Descomposición espectral de la demanda](figures/04_descomposicion.png)
 
