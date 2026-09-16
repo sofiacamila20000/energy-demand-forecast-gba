@@ -2,7 +2,7 @@
 
 Predicción de la demanda eléctrica del Gran Buenos Aires (GBA) a 1, 2, 3 y 4 días de anticipación, usando Random Forest y Gradient Boosting, y una descomposición espectral de la señal (ciclo anual, tendencia interanual, ciclo semanal) con técnicas de análisis de series de tiempo.
 
-**[→ Ver el notebook completo](notebooks/energy_forecast_gba.ipynb)**
+**[→ Ver el notebook completo](notebook/energy_forecast_gba.ipynb)**
 
 ## Resultados
 
